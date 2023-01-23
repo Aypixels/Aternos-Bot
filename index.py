@@ -28,11 +28,11 @@ class MyClient(discord.Client):
             myserv = servs[0]
 
             if myserv.status == 'online':
-                return await client.get_channel(message.channel.id).send('Le serveur est déjà lancé/en lancement !')
+                return await client.get_channel(message.channel.id).send('The server is already launched / in launch!')
 
             myserv.start()
-            await client.get_channel(message.channel.id).send("Le serveur se lance! Pour en savoir plus sur l'avancement fait !info !")
-            await client.get_channel(message.channel.id).send("Il devrait se lancer en 2 à 5 minutes ;)")
+            await client.get_channel(message.channel.id).send("The server is starting! To know more about the progress made !info!")
+            await client.get_channel(message.channel.id).send("It should launch in 2-5 minutes ;)")
             for srv in servs:
                 await client.get_channel(message.channel.id).send(f"*** {srv.domain} ***\n{srv.motd}\n*** Status: {srv.status}\n*** Full address: {srv.address}\n*** Port: {srv.port}\n*** Name: {srv.subdomain}\n*** Minecraft: {srv.software, srv.version}\n*** IsBedrock: {srv.edition == atserver.Edition.bedrock}\n*** IsJava: {srv.edition == atserver.Edition.java}***")
 
@@ -50,12 +50,12 @@ class MyClient(discord.Client):
             if role == 'Admin':
 
                 if myserv.status == 'offline' or myserv.status == 'loading' or myserv.status == 'stopping' or myserv.status == 'saving':
-                    return await client.get_channel(message.channel.id).send("Le serveur est déjà arrêté/en cours d'arrêt :/")
+                    return await client.get_channel(message.channel.id).send("The server is already stopped/stopping :/")
                 else:
                     myserv.stop()
-                    await client.get_channel(message.channel.id).send("Le serveur est en cours d'arrêt...")
+                    await client.get_channel(message.channel.id).send("The server is shutting down...")
             else:
-                await client.get_channel(message.channel.id).send("Vous n'avez pas accès à cette commande...")
+                await client.get_channel(message.channel.id).send("You do not have access to this command...")
 
         if message.content == '!status':
 
